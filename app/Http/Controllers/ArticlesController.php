@@ -35,6 +35,20 @@ class ArticlesController extends Controller
      */
     public function store(Request $request)
     {
+        $article = $request->isMethod('create') ? Articles::findOrFail
+        ($request->article_id) : new Articles;
+
+        $article->id = $request->input('article_id');
+        $article->title = $request->input('title');
+        $article->body = $request->input('body');
+
+        if($article->save()) {
+            return new ArticlesResource($article);
+        }
+    }
+
+    public function update(Request $request)
+    {
         $article = $request->isMethod('put') ? Articles::findOrFail
         ($request->article_id) : new Articles;
 

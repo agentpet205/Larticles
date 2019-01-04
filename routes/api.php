@@ -33,7 +33,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
         Route::post('article', 'ArticlesController@store');
 
         // Update article
-        Route::put('article', 'ArticlesController@store');
+        Route::put('article', 'ArticlesController@update');
 
         // Delete article
         Route::delete('article/{id}', 'ArticlesController@destroy');
