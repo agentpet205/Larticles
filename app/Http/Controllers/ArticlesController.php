@@ -25,24 +25,7 @@ class ArticlesController extends Controller
         
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
- 
-    public function open() 
-    {
-        $data = "This data is open and can be accessed without the client being authenticated";
-        return response()->json(compact('data'),200);
 
-    }
-
-    public function closed() 
-    {
-        $data = "Only authorized users can see this";
-        return response()->json(compact('data'),200);
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -79,28 +62,6 @@ class ArticlesController extends Controller
         return new ArticlesResource($article);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
