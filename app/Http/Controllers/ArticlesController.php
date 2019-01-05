@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Articles;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\Articles as ArticlesResource;
 
 class ArticlesController extends Controller
@@ -35,6 +36,16 @@ class ArticlesController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+            'body' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors(), 400);
+            }
+
         $article = $request->isMethod('create') ? Articles::findOrFail
         ($request->article_id) : new Articles;
 
@@ -49,6 +60,16 @@ class ArticlesController extends Controller
 
     public function update(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+            'body' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors(), 400);
+            }
+
+
         $article = $request->isMethod('put') ? Articles::findOrFail
         ($request->article_id) : new Articles;
 
